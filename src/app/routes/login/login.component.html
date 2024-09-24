@@ -1,0 +1,21 @@
+<div class="w-full h-full grid grid-cols-5 Page">
+    <div class="col-span-2 flex flex-col w-full gap-4 p-8 bg-color1 justify-center">
+        <span class="text-3xl font-podkova-600 text-color4">Log in</span>
+
+        <div class="flex flex-col gap-2 justify-center">
+            <app-input name="email" title="E-mail" [formControl]="email" />
+            <app-input name="password" title="Password" [formControl]="password" [hidden]="true" />
+        </div>
+
+        <div class="flex flex-col">
+            <app-button text="Log in" (click)="login" />
+            <span class="ml-auto">Or <a routerLink="/register">Register</a></span>
+        </div>
+    </div>
+
+    <div class="Display col-span-3 grid grid-cols-1 grid-rows-1 items-center justify-center">
+        <span class="font-podkova-600 text-5xl m-auto backdrop-blur-lg">
+            fozes
+        </span>
+    </div>
+</div>

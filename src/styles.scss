@@ -1,0 +1,38 @@
+@use "colors" as colors;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@for $i from 1 through 10 {
+    .font-noto-#{$i * 100} {
+        font-family: "Noto Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: $i * 100;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+    }
+
+    .font-podkova-#{$i * 100} {
+        font-family: "Podkova", serif;
+        font-optical-sizing: auto;
+        font-weight: $i * 100;
+        font-style: normal;
+    }
+}
+
+app-root {
+    @apply font-noto-400;
+}
+
+body {
+    background-color: colors.$color-1;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html, body {
+    height: 100%;
+}
