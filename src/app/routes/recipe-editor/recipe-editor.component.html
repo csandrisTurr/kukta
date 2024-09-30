@@ -1,1 +1,34 @@
-<p>recipe-editor works!</p>
+<div class="pt-20 h-full">
+    <div class="flex items-center justify-center h-full">
+        <div class="flex flex-col gap-2">
+            <app-input [formControl]="title" name="title" title="Title"></app-input>
+            <app-input [formControl]="desc" name="title" title="Description"></app-input>
+            <div class="flex gap-2">
+                <app-input [formControl]="calories" name="title" title="Calories"></app-input>
+                <app-input [formControl]="time" name="title" title="Time"></app-input>
+            </div>
+            <input type="file" name="img" id="img">
+            <hr>
+            <div>
+                Additions
+                <div class="flex flex-col">
+                    @for (addition of additions | keyvalue; track addition.key) {
+                        <span class="flex justify-between">
+                            <input type="text" [name]="addition.key" [id]="addition.key" [textContent]="addition.value" (input)="changeAddition(addition.key, $event)">
+                            <app-icon name="close" (click)="deleteAddition(addition.key)"></app-icon>
+                        </span>
+                    }
+                </div>
+                <app-button text="Add addition" (click)="addAddition()" />
+            </div>
+            <hr>
+            <div>
+                Categories <br>
+                <select name="" id="">
+                    <option value="">Example</option>
+                </select>
+            </div>
+            <app-button text="Make changes" />
+        </div>
+    </div>
+</div>
