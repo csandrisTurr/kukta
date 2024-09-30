@@ -27,6 +27,8 @@ app-root {
 }
 
 body {
+    @apply border-[1px] border-zinc-100 text-zinc-800;
+
     background-color: colors.$color-1;
     max-width: 1200px;
     margin-left: auto;
