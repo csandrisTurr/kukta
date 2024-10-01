@@ -4,7 +4,14 @@
         <app-navbar-item route="" icon="home" label="Home" />
         <app-navbar-item route="/recipes" icon="restaurant" label="Recipes" />
     </div>
-    <a routerLink="/login" class=""><app-button text="Log in" class="ml-auto w-24 block" /></a>
+    @if (this.authService.isLoggedIn) {
+        <span class="flex ml-auto gap-2">
+            <a routerLink="/recipe-editor" class=""><app-button text="New recipe" class="w-26 block" /></a>
+            <app-button text="Log out" class="w-24 block" />
+        </span>
+    } @else {
+        <a routerLink="/login" class=""><app-button text="Log in" class="ml-auto w-24 block" /></a>
+    }
     <!--
     <app-navbar-item route="/login" icon="login" class="ml-auto" />
     -->
