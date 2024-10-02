@@ -7,7 +7,7 @@
                 <app-input [formControl]="calories" name="title" title="Calories"></app-input>
                 <app-input [formControl]="time" name="title" title="Time"></app-input>
             </div>
-            <input type="file" name="img" id="img">
+            <input type="file" name="img" id="img" (change)="imageChange($event)">
             <hr>
             <div>
                 Additions
@@ -28,7 +28,7 @@
                     <option value="">Example</option>
                 </select>
             </div>
-            <app-button text="Make changes" />
+            <app-button text="Make changes" (click)="submit()" />
         </div>
     </div>
 </div>

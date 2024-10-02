@@ -1,19 +1,35 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { login, logout } from "./auth.actions";
 
 // auth.service.ts
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    constructor(private readonly httpClient: HttpClient) {}
+    auth$: Observable<{ jwt: string, role: string }>;
+    role$: Observable<string>;
+    _jwt = null;
+    role = 'usr';
 
-    private _jwt: string | null = null;
+    constructor(private readonly httpClient: HttpClient, private readonly authStore: Store<{ auth: { jwt: string, role: string }}>) {
+        this.auth$ = authStore.select('auth');
+        this.auth$.subscribe(x => {
+            this._jwt = x.jwt;
+            this.role = x.role;
+        });
+    }
 
     isLoggedIn() {
-        return typeof this._jwt == 'string' && this._jwt.length > 0;
+        return !!this.jwt;
     }
 
     public get jwt() {
         return this._jwt;
+    }
+
+    logout() {
+        this.authStore.dispatch(logout());
     }
 
     login(data: {
@@ -23,7 +39,9 @@ export class AuthService {
         const { email, password } = data;
 
         this.httpClient.post('login', { email, password }).subscribe((x: Array<any>) => {
-            this._jwt = x[0].id;
+            const jwt = x[0].id;
+            const role = x[0].role;
+            this.authStore.dispatch(login({ jwt, role }));
         });
     }
 
@@ -36,7 +54,7 @@ export class AuthService {
         const { name, email, password, phone } = data;
 
         this.httpClient.post('reg', { name, email, password, phone }).subscribe(x => {
-            console.log(x);
+            this.login({ email, password })
         });
     }
 }

@@ -7,6 +7,6 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) 
     const authService = inject(AuthService);
     if (!authService.isLoggedIn()) return next(req);
 
-    const apiReq = req.clone({ headers: req.headers.append('Authorization', `Bearer ${authService.jwt}`)});
+    const apiReq = req.clone({ headers: req.headers.append('Authorization', authService.jwt)});
     return next(apiReq);
 }
