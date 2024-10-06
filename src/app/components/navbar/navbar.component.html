@@ -3,11 +3,10 @@
     <div class="flex justify-center items-center gap-8">
         <app-navbar-item route="" icon="home" label="Home" />
         <app-navbar-item route="/recipes" icon="restaurant" label="Recipes" />
-        @if (this.authService.role == 'adm') {
+        <!-- @if (this.authService.role == 'adm') { -->
             <app-navbar-item route="/users" icon="group" label="Users" />
-        }
     </div>
-    @if (this.authService.isLoggedIn()) {
+    @if (!this.authService.isLoggedIn()) {
         <span class="flex ml-auto gap-2">
             <a routerLink="/recipe-editor" class=""><app-button text="New recipe" class="w-26 block" /></a>
             <app-button text="Log out" class="w-24 block" (click)="logout()" />

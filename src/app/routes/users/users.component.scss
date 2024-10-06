@@ -1,0 +1,20 @@
+.flex {
+    div {
+        @apply grid grid-cols-10 gap-2;
+
+        span {
+            @apply p-2;
+        }
+    }
+}
+
+.grid:nth-child(1) {
+    span {
+        @apply bg-color3 rounded-md px-4 py-2;
+    }
+}
+.grid:not(:nth-child(1)) {
+    span {
+        @apply bg-color2/50 rounded-md px-4 py-2;
+    }
+}
