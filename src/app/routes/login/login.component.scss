@@ -1,4 +1,5 @@
 .Display {
+    @apply max-md:hidden;
     background-image: url("../../../../public/blob.png");
     background-position: center;
     background-size: contain;

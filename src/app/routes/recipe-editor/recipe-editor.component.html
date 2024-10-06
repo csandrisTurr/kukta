@@ -1,32 +1,38 @@
-<div class="pt-20 h-full">
+<div class="Page h-full">
     <div class="flex items-center justify-center h-full">
-        <div class="flex flex-col gap-2">
-            <app-input [formControl]="title" name="title" title="Title"></app-input>
+        <div class="flex flex-col gap-2 max-w-[500px] max-sm:w-full max-sm:p-4">
+            <app-input [formControl]="title" name="title" title="Title" class="w-full"></app-input>
             <app-input [formControl]="desc" name="title" title="Description"></app-input>
-            <div class="flex gap-2">
+            <div class="flex max-sm:flex-col gap-2">
                 <app-input [formControl]="calories" name="title" title="Calories"></app-input>
                 <app-input [formControl]="time" name="title" title="Time"></app-input>
             </div>
             <input type="file" name="img" id="img" (change)="imageChange($event)">
             <hr>
-            <div>
-                Additions
-                <div class="flex flex-col">
+            <div class="flex flex-col gap-2">
+                <span class="font-medium">Additions</span>
+                <div class="flex flex-col gap-2">
                     @for (addition of additions | keyvalue; track addition.key) {
                         <span class="flex justify-between">
-                            <input type="text" [name]="addition.key" [id]="addition.key" [textContent]="addition.value" (input)="changeAddition(addition.key, $event)">
-                            <app-icon name="close" (click)="deleteAddition(addition.key)"></app-icon>
+                            <input type="text" [name]="addition.key" [id]="addition.key" [textContent]="addition.value" (input)="changeAddition(addition.key, $event)" class="border-2 border-solid border-neutral-400 rounded-md px-2">
+                            <app-icon name="close" (click)="deleteAddition(addition.key)" class="cursor-pointer"></app-icon>
                         </span>
                     }
                 </div>
                 <app-button text="Add addition" (click)="addAddition()" />
             </div>
             <hr>
-            <div>
-                Categories <br>
-                <select name="" id="">
-                    <option value="">Example</option>
-                </select>
+            <div class="flex flex-col gap-2">
+                <span class="font-medium">Categories</span>
+                <div class="Categories">
+                    <span>Kaja</span>
+                </div>
+                <div class="flex gap-2">
+                    <select name="" id="" class="w-full bg-color2 px-4 rounded-md">
+                        <option value="">Example</option>
+                    </select>
+                    <app-button text="Add category" (click)="addAddition()" class="w-full" />
+                </div>
             </div>
             <app-button text="Make changes" (click)="submit()" />
         </div>

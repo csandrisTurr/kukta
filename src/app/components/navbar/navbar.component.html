@@ -1,18 +1,18 @@
-<div class="grid grid-cols-3 px-8 py-4 gap-4 justify-between h-[80px]">
-    <span class="font-podkova-600 text-3xl my-auto color-4 NavbarTitle">Kukta</span>
+<div class="grid md:grid-cols-3 px-8 py-4 md:gap-4 max-md:gap-2 md:justify-between max-md:justify-center md:h-[80px] max-md:grid-rows-3">
+    <span class="font-podkova-600 text-3xl my-auto color-4 NavbarTitle max-md:text-center">Kukta</span>
     <div class="flex justify-center items-center gap-8">
-        <app-navbar-item route="" icon="home" label="Home" />
+        <app-navbar-item route="" icon="home" label="Home" class="text-center" />
         <app-navbar-item route="/recipes" icon="restaurant" label="Recipes" />
         <!-- @if (this.authService.role == 'adm') { -->
             <app-navbar-item route="/users" icon="group" label="Users" />
     </div>
     @if (!this.authService.isLoggedIn()) {
-        <span class="flex ml-auto gap-2">
+        <span class="flex md:ml-auto gap-2 max-md:justify-center">
             <a routerLink="/recipe-editor" class=""><app-button text="New recipe" class="w-26 block" /></a>
             <app-button text="Log out" class="w-24 block" (click)="logout()" />
         </span>
     } @else {
-        <a routerLink="/login" class=""><app-button text="Log in" class="ml-auto w-24 block" /></a>
+        <a routerLink="/login" class=""><app-button text="Log in" class="md:ml-auto w-24 block" /></a>
     }
     <!--
     <app-navbar-item route="/login" icon="login" class="ml-auto" />

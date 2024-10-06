@@ -1,0 +1,7 @@
+.Categories {
+    @apply flex flex-wrap gap-2;
+
+    span {
+        @apply py-1 px-3 bg-color3 rounded-full;
+    }
+}

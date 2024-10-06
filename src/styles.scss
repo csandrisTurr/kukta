@@ -38,3 +38,7 @@ body {
 html, body {
     height: 100%;
 }
+
+.Page {
+    @apply max-md:pt-[168px] md:pt-[80px];
+}
