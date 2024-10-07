@@ -3,11 +3,12 @@ import { IconComponent } from '../../components/icon/icon.component';
 import { Recipe } from '../../types/Recipe';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [IconComponent, RouterLink],
+  imports: [IconComponent, RouterLink, LoaderComponent],
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.scss'
 })

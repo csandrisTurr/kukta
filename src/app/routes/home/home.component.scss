@@ -10,7 +10,7 @@
             }
 
             &:last-child {
-                @apply text-4xl;
+                @apply text-4xl mt-auto font-medium;
             }
         }
     }
