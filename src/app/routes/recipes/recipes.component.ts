@@ -4,6 +4,7 @@ import { Recipe } from '../../types/Recipe';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { AuthService } from '../../modules/auth/auth.service';
 
 @Component({
   selector: 'app-recipes',
@@ -15,7 +16,10 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 export class RecipesComponent implements OnInit {
   recipes: Recipe[] = [];
 
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(
+    readonly authService: AuthService,
+    private readonly httpClient: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.httpClient.get('recipes').subscribe(x => {
@@ -31,5 +35,14 @@ export class RecipesComponent implements OnInit {
       console.log(x)
 
     }, (x) => alert(x.error.text))
+  }
+
+  getCategories(id: number) {
+    return []
+  }
+
+  deleteRecipe(id: number) {
+    this.httpClient.delete(`recipes/${id}`).subscribe(x => console.log(x));
+    this.recipes = this.recipes.filter(x => x.id != id);
   }
 }

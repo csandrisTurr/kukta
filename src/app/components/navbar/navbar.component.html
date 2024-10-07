@@ -3,6 +3,9 @@
     <div class="flex justify-center items-center gap-8">
         <app-navbar-item route="" icon="home" label="Home" class="text-center" />
         <app-navbar-item route="/recipes" icon="restaurant" label="Recipes" />
+        @if (this.authService.isLoggedIn()) {
+            <app-navbar-item route="/me" icon="person" label="Me" />
+        }
         @if (this.authService.role == 'adm') {
             <app-navbar-item route="/users" icon="group" label="Users" />
         }

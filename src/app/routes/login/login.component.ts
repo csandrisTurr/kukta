@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { InputComponent } from "../../components/input/input.component";
 import { ButtonComponent } from '../../components/button/button.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../modules/auth/auth.service';
 import { Store } from '@ngrx/store';
@@ -21,11 +21,16 @@ export class LoginComponent {
   email = new FormControl('');
   password = new FormControl('');
 
-  constructor(private readonly authService: AuthService, private readonly authStore: Store<{ jwt: string }>) {
+  constructor(
+    private readonly authService: AuthService,
+    private readonly authStore: Store<{ jwt: string }>,
+    private readonly router: Router,
+  ) {
     this.jwt$ = authStore.select('jwt');
   }
 
   login() {
     this.authService.login({ email: this.email.value, password: this.password.value });
+    this.router.navigate(['/recipes']);
   }
 }

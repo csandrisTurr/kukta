@@ -25,10 +25,18 @@
                                 <app-icon name="schedule" />
                                 {{ recipe.time }} min
                             </span>
+                            @if (authService.jwt == recipe.user_id || authService.role == 'adm') {
+                                <app-icon name="delete" (click)="deleteRecipe(recipe.id)" />
+                            }
                         </span>
                     </span>
                     <span class="mb-2 text-sm text-color4">by {{ recipe.user_id }}</span>
                     <span class="text-neutral-600 break-all w-full">{{ recipe.description }}</span>
+                    <div>
+                        @for (category of getCategories(recipe.id); track $index) {
+                            <span>category</span>
+                        }
+                    </div>
                 </div>
             </div>
             }

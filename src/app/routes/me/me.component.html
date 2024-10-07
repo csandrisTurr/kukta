@@ -1,0 +1,16 @@
+<div class="Page flex items-center justify-center">
+    <div class="flex flex-col gap-4 w-[500px]">
+        <div class="flex flex-col gap-2">
+            <app-input [formControl]="name" title="Username" name="username" />
+            <app-input [formControl]="email" title="Email" name="email" />
+            <app-input [formControl]="phone" title="Phone" name="phone" />
+            <app-button (click)="changeData()" text="Apply changes"/>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <app-input [formControl]="password" title="Password" name="password" />
+            <app-input [formControl]="confirmPassword" title="Confirm Password" name="confirmPassword" />
+            <app-button (click)="changePassword()" text="Change password"/>
+        </div>
+    </div>
+</div>

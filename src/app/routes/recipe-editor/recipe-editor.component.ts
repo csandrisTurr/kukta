@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { ButtonComponent } from '../../components/button/button.component';
 import { KeyValuePipe } from '@angular/common';
 import { IconComponent } from '../../components/icon/icon.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../../types/Category';
 
@@ -29,6 +29,7 @@ export class RecipeEditorComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly httpClient: HttpClient,
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -95,6 +96,7 @@ export class RecipeEditorComponent implements OnInit {
       additions: Object.values(this.additions),
     }).subscribe(x => {
       console.log(x)
-    }, (x) => alert(x.error.text))
+    }, (x) => alert(x.error.text));
+    this.router.navigate(['/recipes']);
   }
 }

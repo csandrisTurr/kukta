@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from '../../components/button/button.component';
 import { InputComponent } from '../../components/input/input.component';
 import { AuthService } from '../../modules/auth/auth.service';
@@ -13,7 +13,10 @@ import { AuthService } from '../../modules/auth/auth.service';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
 
   name = new FormControl('');
   email = new FormControl('');
@@ -27,5 +30,6 @@ export class RegisterComponent {
       password: this.password.value,
       phone: this.phone.value,
      });
+    this.router.navigate(['/recipes']);
   }
 }
