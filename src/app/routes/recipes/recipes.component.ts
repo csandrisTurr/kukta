@@ -30,6 +30,6 @@ export class RecipesComponent implements OnInit {
       });
       console.log(x)
 
-    })
+    }, (x) => alert(x.error.text))
   }
 }

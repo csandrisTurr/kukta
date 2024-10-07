@@ -12,29 +12,33 @@
             </tr>
         </table>
         -->
-        <div class="Stats grid max-md:grid-cols-2 md:grid-cols-4 xl:grid-cols-6">
-            <div>
-                <span>Number of registered users</span>
-                <span>{{ stats.users }}</span>
+        @if (stats) {
+            <div class="Stats grid max-md:grid-cols-2 md:grid-cols-4 xl:grid-cols-6">
+                <div>
+                    <span>Number of registered users</span>
+                    <span>{{ stats.users }}</span>
+                </div>
+                <div>
+                    <span>Number of recipes</span>
+                    <span>{{ stats.recipes }}</span>
+                </div>
+                <div>
+                    <span>Number of categories</span>
+                    <span>{{ stats.categories }}</span>
+                </div>
+                <div>
+                    <span>Number of additions</span>
+                    <span>{{ stats.additions }}</span>
+                </div>
+                <div class="xl:col-span-1 md:col-span-2">
+                    <span>Number of category claims</span>
+                    <span>{{ stats.categoryClaims }}</span>
+                </div>
+                <div class="xl:col-span-1 md:col-span-2"></div>
             </div>
-            <div>
-                <span>Number of recipes</span>
-                <span>{{ stats.recipes }}</span>
-            </div>
-            <div>
-                <span>Number of categories</span>
-                <span>{{ stats.categories }}</span>
-            </div>
-            <div>
-                <span>Number of additions</span>
-                <span>{{ stats.additions }}</span>
-            </div>
-            <div class="xl:col-span-1 md:col-span-2">
-                <span>Number of category claims</span>
-                <span>{{ stats.categoryClaims }}</span>
-            </div>
-            <div class="xl:col-span-1 md:col-span-2"></div>
-        </div>
+        } @else {
+            <app-loader class="mx-auto" />
+        }
         <div class="Userlist flex flex-col gap-2">
             <div class="font-bold Userlist-header">
                 <span class="col-span-2">ID</span>
@@ -43,22 +47,39 @@
                 <span class="col-span-1">Role</span>
                 <span class="col-span-2">Phone</span>
                 <span class="col-span-1">Banned</span>
+                <span class="col-span-1"> </span>
             </div>
             @if (users.length > 0) {
                 @for (user of users; track $index) {
                 <div class="Userlist-row">
                     <span class="col-span-2">{{ user.id }}</span>
-                    <span class="col-span-2">{{ user.name }}</span>
-                    <span class="col-span-2">{{ user.email }}</span>
-                    <span class="col-span-1">{{ user.role }}</span>
-                    <span class="col-span-2">{{ user.phone }}</span>
-                    <span class="col-span-1">{{ user.banned }}</span>
+                    <span class="col-span-2">
+                        <input type="text" name="" [id]="user.id+'-name'" [value]="user.name">
+                    </span>
+                    <span class="col-span-2">
+                        <input type="email" name="" [id]="user.id+'-email'" [value]="user.email">
+                    </span>
+                    <span class="col-span-1">
+                        <select name="" [id]="user.id+'-role'" [value]="user.role">
+                            <option value="usr">User</option>
+                            <option value="adm">Admin</option>
+                        </select>
+                    </span>
+                    <span class="col-span-2">
+                        <input type="text" name="" [id]="user.id+'-phone'" [value]="user.phone">
+                    </span>
+                    <span class="col-span-1">
+                        <input type="checkbox" name="" [id]="user.id+'-banned'" [checked]="user.banned">
+                    </span>
+                    <span class="col-span-1">
+                        <app-icon name="edit" (click)="editUser(user.id)" class="cursor-pointer" />
+                        <app-icon name="delete" (click)="deleteUser(user.id)" class="cursor-pointer" />
+                    </span>
                 </div>
                 }
             } @else {
                 <app-loader />
             }
-            <app-button text="Apply changes" class="mt-6 ml-auto align-self-end" />
         </div>
     </div>
 </div>

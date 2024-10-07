@@ -4,11 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../types/User';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { Stats } from '../../types/Stats';
+import { IconComponent } from '../../components/icon/icon.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [ButtonComponent, LoaderComponent],
+  imports: [ButtonComponent, LoaderComponent, IconComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
@@ -30,4 +31,17 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  editUser(id: string) {
+    this.httpClient.patch(`users/${id}`, {
+      name: (document.getElementById(`${id}-name`) as any).value,
+      email: (document.getElementById(`${id}-email`) as any).value,
+      role: (document.getElementById(`${id}-role`) as any).value,
+      phone: (document.getElementById(`${id}-phone`) as any).value,
+      banned: (document.getElementById(`${id}-banned`) as any).value == 'off' ? true : false,
+    }).subscribe(x => alert(x));
+  }
+
+  deleteUser(id: string) {
+    this.httpClient.delete(`users/${id}`);
+  }
 }

@@ -18,10 +18,10 @@
 
 .Userlist {
     div {
-        @apply grid grid-cols-10 gap-2;
+        @apply grid grid-cols-11 gap-2;
 
         span {
-            @apply p-2;
+            @apply p-2 flex justify-center items-center;
         }
     }
 }

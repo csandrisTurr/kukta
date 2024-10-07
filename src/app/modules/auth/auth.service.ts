@@ -42,7 +42,7 @@ export class AuthService {
             const jwt = x[0].id;
             const role = x[0].role;
             this.authStore.dispatch(login({ jwt, role }));
-        });
+        }, (x) => alert(x.error.text));
     }
 
     register(data: {
@@ -55,6 +55,6 @@ export class AuthService {
 
         this.httpClient.post('reg', { name, email, password, phone }).subscribe(x => {
             this.login({ email, password })
-        });
+        }, (x) => alert(x.error.text));
     }
 }

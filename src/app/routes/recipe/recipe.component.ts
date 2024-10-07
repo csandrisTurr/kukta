@@ -31,8 +31,8 @@ export class RecipeComponent implements OnInit {
 
       this.httpClient.get(`recipes/${this.route.snapshot.params['id']}/additions`).subscribe(x => {
         this.recipe.additions = (x as any).map(x => x.name);
-      })
-    })
+      }, (x) => alert(x.error.text))
+    }, (x) => alert(x.error.text))
 
   }
 }

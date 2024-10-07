@@ -46,7 +46,7 @@ export class RecipeEditorComponent implements OnInit {
         categoryInput.appendChild(option);
       });
       */
-    });
+    }, (x) => alert(x.error.text));
   }
 
   get filteredCategories() {
@@ -95,6 +95,6 @@ export class RecipeEditorComponent implements OnInit {
       additions: Object.values(this.additions),
     }).subscribe(x => {
       console.log(x)
-    })
+    }, (x) => alert(x.error.text))
   }
 }
