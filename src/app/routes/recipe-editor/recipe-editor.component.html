@@ -25,13 +25,17 @@
             <div class="flex flex-col gap-2">
                 <span class="font-medium">Categories</span>
                 <div class="Categories">
-                    <span>Kaja</span>
+                    @for (category of addedCategories; track $index) {
+                        <span (click)="deleteCategory(category.id)">{{ category.name }}</span>
+                    }
                 </div>
                 <div class="flex gap-2">
-                    <select name="" id="" class="w-full bg-color2 px-4 rounded-md">
-                        <option value="">Example</option>
+                    <select name="" id="categoryInput" class="w-full bg-color2 px-4 rounded-md">
+                        @for (category of filteredCategories; track $index) {
+                            <option [value]="category.id">{{ category.name }}</option>
+                        }
                     </select>
-                    <app-button text="Add category" (click)="addAddition()" class="w-full" />
+                    <app-button text="Add category" (click)="addCategory()" class="w-full" />
                 </div>
             </div>
             <app-button text="Make changes" (click)="submit()" />

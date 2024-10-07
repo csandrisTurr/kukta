@@ -1,4 +1,22 @@
-.flex {
+.Stats {
+    @apply gap-4;
+
+    div {
+        @apply p-4 flex flex-col gap-2 bg-color2/50 rounded-md;
+
+        span {
+            &:first-child {
+
+            }
+
+            &:last-child {
+                @apply text-4xl mt-auto font-medium;
+            }
+        }
+    }
+}
+
+.Userlist {
     div {
         @apply grid grid-cols-10 gap-2;
 
@@ -8,12 +26,12 @@
     }
 }
 
-.grid:nth-child(1) {
+.Userlist .Userlist-header {
     span {
         @apply bg-color3 rounded-md px-4 py-2;
     }
 }
-.grid:not(:nth-child(1)) {
+.Userlist .Userlist-row {
     span {
         @apply bg-color2/50 rounded-md px-4 py-2;
     }

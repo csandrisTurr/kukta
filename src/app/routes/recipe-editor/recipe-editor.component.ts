@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InputComponent } from '../../components/input/input.component';
 import { FormControl } from '@angular/forms';
 import { ButtonComponent } from '../../components/button/button.component';
@@ -6,6 +6,7 @@ import { KeyValuePipe } from '@angular/common';
 import { IconComponent } from '../../components/icon/icon.component';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Category } from '../../types/Category';
 
 @Component({
   selector: 'app-recipe-editor',
@@ -14,8 +15,11 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './recipe-editor.component.html',
   styleUrl: './recipe-editor.component.scss'
 })
-export class RecipeEditorComponent {
+export class RecipeEditorComponent implements OnInit {
   additions = {};
+  categories: Category[] = [];
+  addedCategories: Category[] = [];
+
   title = new FormControl('');
   desc = new FormControl('');
   calories = new FormControl('');
@@ -26,6 +30,38 @@ export class RecipeEditorComponent {
     private readonly route: ActivatedRoute,
     private readonly httpClient: HttpClient,
   ) {}
+
+  ngOnInit(): void {
+    const categoryInput = document.getElementById('categoryInput');
+
+    this.httpClient.get('categories').subscribe(x => {
+      this.categories = (x as Category[]);
+
+      /*
+      this.categories.forEach(x => {
+        const option = document.createElement('option');
+        option.value = x.id;
+        option.innerHTML = x.name;
+
+        categoryInput.appendChild(option);
+      });
+      */
+    });
+  }
+
+  get filteredCategories() {
+    return this.categories.filter(x => 
+      !this.addedCategories.includes(x))
+  };
+
+  addCategory() {
+    const categoryInput = document.getElementById('categoryInput');
+    this.addedCategories.push(this.categories.find(x => x.id == (categoryInput as any).value));
+  }
+
+  deleteCategory(categoryId) {
+    this.addedCategories = this.addedCategories.filter(x => x.id != categoryId);
+  }
 
   imageChange(event: any) {
     const file = event.target.files[0];
@@ -55,8 +91,8 @@ export class RecipeEditorComponent {
       calories: this.calories.value,
       time: this.time.value,
       image: this.img.value,
-      categories: [],
-      additions: [],
+      categories: this.categories.map(x => x.id),
+      additions: Object.values(this.additions),
     }).subscribe(x => {
       console.log(x)
     })

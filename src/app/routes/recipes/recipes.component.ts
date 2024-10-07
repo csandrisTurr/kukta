@@ -23,6 +23,8 @@ export class RecipesComponent implements OnInit {
         const decoder = new TextDecoder();
         const arr = new Uint8Array(x.image.data)
         x.image = decoder.decode(arr);
+        if (x.description.length > 100)
+          x.description = x.description.slice(0, 100) + '...';
 
         return x;
       });

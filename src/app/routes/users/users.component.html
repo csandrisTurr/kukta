@@ -1,5 +1,5 @@
 <div class="Page">
-    <div class="p-4">
+    <div class="p-4 flex flex-col gap-4">
         <!--
         <table class="gap-4 w-full">
             <tr>
@@ -12,23 +12,52 @@
             </tr>
         </table>
         -->
-        <div class="flex flex-col gap-2">
-            <div class="font-bold">
-                <span class="col-span-1">ID</span>
-                <span class="col-span-2">Username</span>
-                <span class="col-span-3">Email</span>
-                <span class="col-span-1">Role</span>
-                <span class="col-span-2">Phone</span>
-                <span class="col-span-1">Banned</span>
+        <div class="Stats grid max-md:grid-cols-2 md:grid-cols-4 xl:grid-cols-6">
+            <div>
+                <span>Number of registered users</span>
+                <span>{{ stats.users }}</span>
             </div>
             <div>
-                <span class="col-span-1">ID</span>
+                <span>Number of recipes</span>
+                <span>{{ stats.recipes }}</span>
+            </div>
+            <div>
+                <span>Number of categories</span>
+                <span>{{ stats.categories }}</span>
+            </div>
+            <div>
+                <span>Number of additions</span>
+                <span>{{ stats.additions }}</span>
+            </div>
+            <div class="xl:col-span-1 md:col-span-2">
+                <span>Number of category claims</span>
+                <span>{{ stats.categoryClaims }}</span>
+            </div>
+            <div class="xl:col-span-1 md:col-span-2"></div>
+        </div>
+        <div class="Userlist flex flex-col gap-2">
+            <div class="font-bold Userlist-header">
+                <span class="col-span-2">ID</span>
                 <span class="col-span-2">Username</span>
-                <span class="col-span-3">Email</span>
+                <span class="col-span-2">Email</span>
                 <span class="col-span-1">Role</span>
                 <span class="col-span-2">Phone</span>
                 <span class="col-span-1">Banned</span>
             </div>
+            @if (users.length > 0) {
+                @for (user of users; track $index) {
+                <div class="Userlist-row">
+                    <span class="col-span-2">{{ user.id }}</span>
+                    <span class="col-span-2">{{ user.name }}</span>
+                    <span class="col-span-2">{{ user.email }}</span>
+                    <span class="col-span-1">{{ user.role }}</span>
+                    <span class="col-span-2">{{ user.phone }}</span>
+                    <span class="col-span-1">{{ user.banned }}</span>
+                </div>
+                }
+            } @else {
+                <app-loader />
+            }
             <app-button text="Apply changes" class="mt-6 ml-auto align-self-end" />
         </div>
     </div>
